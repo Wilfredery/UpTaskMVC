@@ -1,17 +1,21 @@
 <?php
 
 
-namespace controllers;
+namespace Controllers;
+
+use MVC\Router;
 
 class LoginControllers {
 
-    public static function login() {
-
-        echo "Desde el login.";
+    public static function login(Router $router) {
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         }
+        //Render a la vista
+        $router->render('auth/login', [
+            'titulo' => 'iniciar sesion'
+        ]);
     }
 
     public static function logout() {
@@ -25,13 +29,18 @@ class LoginControllers {
 
     }
 
-    public static function crear() {
+    public static function crear(Router $router) {
 
         echo "Desde el crear.";
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         }
+
+        //Render a la vista
+        $router->render('auth/crear', [
+            'titulo' => 'Creating'
+        ]);
     }
 
     public static function olvidar() {
