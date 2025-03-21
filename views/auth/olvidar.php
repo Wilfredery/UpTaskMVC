@@ -1,29 +1,23 @@
-<div class="contenedor login">
+<div class="contenedor olvidar">
 
     <?php include_once __DIR__ . '/../template/nombre-sitio.php'; ?>
 
-
-
     <div class="contenedor-sm">
-        <p class="descripcion-pagina">Iniciar sesion</p>
+        <p class="descripcion-pagina">Recuperar tu acceso de cuenta</p>
 
         <form class="formulario" method="POST" action="/">
+
             <div class="campo">
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" placeholder="Tu correo electronico">
             </div>
 
-            <div class="campo">
-                <label for="password">Contraseña</label>
-                <input type="password" name="password" id="password" placeholder="Tu Contraseña">
-            </div>
-
-            <input type="submit" value="Acceder" class="boton">
+            <input type="submit" value="Enviar" class="boton">
         </form>
 
         <div class="acciones">
+            <a href="/">Iniciar sesion</a>
             <a href="/crear">Crear cuenta</a>
-            <a href="/olvidar">Olvide el password</a>
         </div>        
     </div> <!-- Fin contenedor-sm -->
 </div>

@@ -31,8 +31,6 @@ class LoginControllers {
 
     public static function crear(Router $router) {
 
-        echo "Desde el crear.";
-
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         }
@@ -43,34 +41,45 @@ class LoginControllers {
         ]);
     }
 
-    public static function olvidar() {
-
-        echo "Desde el olvidar.";
+    public static function olvidar(Router $router) {
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         }
+
+        //Render a la vista
+        $router->render('auth/olvidar', [
+            'titulo' => 'Rec cuenta'
+        ]);
     }
 
-    public static function restablecer() {
-
-        echo "Desde el restablecer.";
+    public static function restablecer(Router $router) {
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         }
+
+        //Render a la vista
+        $router->render('auth/restablecer', [
+            'titulo' => 'Rec password'
+        ]);
     }
 
 
-    public static function mensaje() {
+    public static function mensaje(Router $router) {
 
-        echo "Desde el mensaje.";
-
+        //Render a la vista
+        $router->render('auth/mensaje', [
+            'titulo' => 'mensaje'
+        ]);
     }
 
-    public static function confirmar() {
+    public static function confirmar(Router $router) {
 
-        echo "Desde el restablecer.";
+        //Render a la vista
+        $router->render('auth/confirmar', [
+            'titulo' => 'confirmar'
+        ]);
 
     }
 
