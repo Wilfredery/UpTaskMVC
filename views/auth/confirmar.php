@@ -4,7 +4,7 @@
 
     <div class="contenedor-sm">
 
-    <div class="acciones">
+    <div class="acciones Confirmar">
         <a href="/">Iniciar sesion</a>
     </div>        
     </div> <!-- Fin contenedor-sm -->
