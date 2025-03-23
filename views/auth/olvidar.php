@@ -5,7 +5,9 @@
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Recuperar tu acceso de cuenta</p>
 
-        <form class="formulario" method="POST" action="/">
+        <?php include_once __DIR__ . '/../template/alertas.php'; ?>
+
+        <form class="formulario" method="POST" action="/olvidar" >
 
             <div class="campo">
                 <label for="email">Email</label>

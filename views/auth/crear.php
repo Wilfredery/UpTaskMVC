@@ -16,8 +16,7 @@
 
             <div class="campo">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Tu correo electronico" 
-                <input type="text" name="nombre" id="nombre" placeholder="Tu nombre" value="<?php echo $usuario->email; ?>">
+                <input type="email" name="email" id="email" placeholder="Tu correo electronico" value="<?php echo $usuario->email; ?>">
             </div>
 
             <div class="campo">

@@ -4,6 +4,8 @@
 
     <div class="contenedor-sm">
 
+    <?php include_once __DIR__ . '/../template/alertas.php'; ?>
+
     <div class="acciones Confirmar">
         <a href="/">Iniciar sesion</a>
     </div>        
