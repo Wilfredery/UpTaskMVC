@@ -2,12 +2,12 @@
 
     <?php include_once __DIR__ . '/../template/nombre-sitio.php'; ?>
 
-
-
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Iniciar sesion</p>
 
-        <form class="formulario" method="POST" action="/">
+        <?php include_once __DIR__ . '/../template/alertas.php'; ?>
+
+        <form class="formulario" method="POST" >
             <div class="campo">
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" placeholder="Tu correo electronico">
