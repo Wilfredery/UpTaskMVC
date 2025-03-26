@@ -13,4 +13,23 @@
     .principal {
         flex: 1;//Forza para que tome el resto de contenido
     }
+
+    .contenido {
+        padding: 2rem;
+        .nombre-pagina {
+            font-size: 2.8rem;
+            text-align: center;
+        }
+    }
+
+    .formulario {
+        input:not([type="submit"]) {
+            background-color: v.$blanco;
+        }
+
+        input[type="submit"] {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+    }
 }

@@ -2,8 +2,10 @@
     <h2>UpTask</h2>
 
     <nav class="sidebar-nav">
-        <a href="/dashboard">Proyectos</a>
-        <a href="/crear-proyecto">Crear</a>
-        <a href="/perfil">Perfil</a>
+        <a class="<?php echo ($titulo === 'Proyectos') ? 'activo' : ''; ?>" href="/dashboard">Proyectos</a>
+
+        <a class="<?php echo ($titulo === 'Crear') ? 'activo' : '';  ?>" href="/crear">Crear</a>
+
+        <a class="<?php echo ($titulo === 'Perfil') ? 'activo' : '';  ?>"  href="/perfil">Perfil</a>
     </nav>
 </aside>
