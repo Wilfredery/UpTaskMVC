@@ -4,7 +4,7 @@
 
         <?php include_once __DIR__ . '/../template/alertas.php'; ?>
 
-        <form class="formulario" action="">
+        <form class="formulario" method="POST" >
 
             <?php include_once __DIR__ . '/formulario.php'; ?>
 

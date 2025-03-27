@@ -39,7 +39,6 @@ class LoginControllers {
                         header('Location: /dashboard');
                     } else {
                         Usuario::setAlerta('error', 'Contraseña incorrecta');
-                        debuguear('Incorrecto');
                     }
                 } 
             }

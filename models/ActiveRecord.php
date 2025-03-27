@@ -65,9 +65,15 @@ class ActiveRecord {
     public static function where($columna, $valor) {
         $query = "SELECT * FROM " . static::$tabla . " WHERE $columna = '$valor'";
         $resultado = self::consultarSQL($query);
-        return array_shift( $resultado ) ;
+        return array_shift( $resultado );//Trae el primer registro como objeto
     }
 
+    //Busca todo los registros que pertenecen al mismo id.
+    public static function belogsTo($columna, $valor) {
+        $query = "SELECT * FROM " . static::$tabla . " WHERE $columna = '$valor'";
+        $resultado = self::consultarSQL($query);
+        return $resultado; 
+    }
     // SQL para Consultas Avanzadas.
     public static function SQL($consulta) {
         $query = $consulta;
