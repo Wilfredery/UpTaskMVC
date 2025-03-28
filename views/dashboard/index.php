@@ -14,7 +14,7 @@
 
                 <li class="proyecto">
 
-                    <a href="/proyecto?id=<?php echo $proyecto->url; ?>">
+                    <a href="/proyecto?id=<?php echo $proyecto->url;?>">
 
                         <?php echo $proyecto->proyecto; ?>
                     </a>
