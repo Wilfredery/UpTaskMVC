@@ -6,37 +6,54 @@
 
     function mostrarFormulario() {
         
-        const modal =document.createElement('DIV');
+        const modal = document.createElement('DIV');
         modal.classList.add('modal');
         modal.innerHTML = `
         
             <form class="formulario nueva-tarea">
-                <legend>Tarea</legend>
+                <legend>Agrega una nueva tarea</legend>
 
                 <div class="campo">
-                    <label>Agrega una nueva tarea </label>
+                    <label for="tarea"> Tarea </label>
 
                     <input 
                     type="text"
                     name="tarea"
                     placeholder="Agregar tarea al proyecto actual"
                     id="tarea"
+                    required
                     >
                 </div>
 
                 <div class="opciones">
-                    <input type="submit" class="submit-nueva-tarea" value="Agregar tarea">
+                    <input class="submit-nueva-tarea" type="submit" value="Agregar tarea">
 
-                    <button type="button" class="cerrar-modal">Cancelar</button>
+                    <button class="cerrar-modal" type="button">Cancelar</button>
                 </div>
             </form>
         `;
         setTimeout(() => {
             const form = document.querySelector('.formulario');
             form.classList.add('animar');
-        }, 1000);
-        console.log(modal);
+        }, 100);
+
+        modal.addEventListener('click', function(evento) {
+            //Evita que si hay un boton de tipo submit en la zona este lo bloquea.
+            evento.preventDefault(); 
+
+            //Esto se aplica cuando se trabajo con el InnerHTML.
+            if(evento.target.classList.contains('cerrar-modal')) {
+                const form = document.querySelector('.formulario');
+                form.classList.add('cerrar');
+                setTimeout(() => {
+                    modal.remove();
+                }, 500);
+                
+
+            } 
+
+            console.log(evento.target);
+        });
         document.querySelector('body').appendChild(modal);
     }
-})();
-
+})(); //END IIFE
