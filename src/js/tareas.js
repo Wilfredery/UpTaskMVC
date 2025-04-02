@@ -43,17 +43,71 @@
 
             //Esto se aplica cuando se trabajo con el InnerHTML.
             if(evento.target.classList.contains('cerrar-modal')) {
+
                 const form = document.querySelector('.formulario');
                 form.classList.add('cerrar');
+
                 setTimeout(() => {
                     modal.remove();
                 }, 500);
                 
-
             } 
 
-            console.log(evento.target);
+            if(evento.target.classList.contains('submit-nueva-tarea')) {
+                
+                submitFormNewTarea();
+            }
         });
-        document.querySelector('body').appendChild(modal);
+        document.querySelector('.dashboard').appendChild(modal);
+    }
+
+    function submitFormNewTarea() {
+
+        //El value permite mostrar lo que se guarndo en esa variable que escribiste.
+        //El trim elimina los espacios en blancos.
+        const tarea = document.querySelector('#tarea').value.trim();
+
+        if(tarea === '') {
+
+            //Mostrar una alerta de error.
+            
+            mostrarAlert('El nombre de la tarea es obligatorio', 'error', document.querySelector('.formulario legend'));
+            
+            return;
+        } 
+
+        agregarTarea(tarea);
+    }
+
+    function mostrarAlert(mensaje, tipo, referencia) {
+        //Prevenir la creacion de multiples alertas.
+        const alertPrev = document.querySelector('.alerta');
+
+        if(alertPrev) {
+            alertPrev.remove();
+        }
+
+        const alerta = document.createElement('DIV');
+
+        //Con tipo se deja dicho qye puede ser un alerta de eror o un alerta de exito.
+        alerta.classList.add('alerta', tipo);
+        alerta.textContent = mensaje;
+
+        //Este codigo inserta antes del legend y no adentro.
+        //El nextElementSiblings toma la referencia de colocarlo despues del elemento padre y antes delsegundo elemento del HTML.
+        referencia.parentElement.insertBefore(alerta, referencia.nextElementSibling);
+        // console.log(referencia);
+        // console.log(referencia.parentElement);
+        // console.log(referencia.nextElementSibling);
+
+        //Eliminar la alerta despues de cierto tiempo
+        setTimeout(() => {
+            alerta.remove();
+        }, 3000);
+    }
+    
+    //Consultar al sv para agregar una nueva tarea al proyecto actual.
+    function agregarTarea(tarea) {
+
     }
 })(); //END IIFE

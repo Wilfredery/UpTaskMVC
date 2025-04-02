@@ -21,6 +21,11 @@
         opacity: 0;
         border-radius: 1rem;
 
+        input[type="text"] {
+            border: 1px solid v.$gris;
+            border-radius: 1rem;
+        }
+
         legend {
             font-size: 2rem;
             text-align: center;
