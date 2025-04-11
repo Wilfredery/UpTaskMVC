@@ -12,6 +12,7 @@
 
     .principal {
         flex: 1;//Forza para que tome el resto de contenido
+        overflow: scroll;
     }
 
     .contenido {
