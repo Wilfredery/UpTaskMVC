@@ -1,6 +1,7 @@
 (function() { //IIFE
 
     obtenerTareas();
+    let tareas =[];
 
     //boton para mostrar el Modal de agregar tarea
     const nuevaTareaBtn = document.querySelector('#agregar-tarea');
@@ -14,8 +15,8 @@
             const respuesta = await fetch(url);
             const resultado = await respuesta.json();
             
-            const {tareas} = resultado;
-            mostrarTareas(tareas);
+            tareas = resultado.tareas;
+            mostrarTareas();
 
         } catch (error) {
 
@@ -23,7 +24,11 @@
         }
     }
 
-    function mostrarTareas(tareas) {
+    function mostrarTareas() {
+        
+        limpiartareas();
+
+
         if(tareas.length === 0) {
             const contenedorTareas = document.querySelector('#listado-tareas');
 
@@ -205,7 +210,7 @@
             });
 
             const resultado = await respuesta.json();
-            console.log(resultado);
+           
 
             mostrarAlert(resultado.mensaje, resultado.tipo, document.querySelector('.formulario legend'));
 
@@ -216,6 +221,21 @@
 
                     window.location.reload();
                 }, 3000);
+
+                //Agregar el objeto de tarea al global de tareas.
+                const tareaObj = {
+                    id: String(resultado.id),
+                    nombre: tarea,
+                    estado: "0",
+                    proyectoid: resultado.proyectoid
+
+                }
+
+                //Este es el global que esta arribita.
+                tareas = [...tareas, tareaObj];
+                mostrarTareas();
+
+                console.log(tareaObj);
             }
             
         } catch (error) {
@@ -228,6 +248,15 @@
 
         const proyecto = Object.fromEntries(proyectoParams.entries());
         return proyecto.id;
+    }
+
+    function limpiartareas() {
+        const listadoTareas= document.querySelector('#listado-tareas');
+        
+        //busca el elemento del id listado-tareas, evalua si hay contenido y si hay ira eliminando 1 por 1.
+        while(listadoTareas.firstChild) {
+            listadoTareas.removeChild(listadoTareas.firstChild);
+        }
     }
 
 })(); //END IIFE

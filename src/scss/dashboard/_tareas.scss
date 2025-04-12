@@ -42,6 +42,7 @@
     .opciones {
         display: flex;
         gap: 1rem;
+        
 
         button {
             border: none;
@@ -49,6 +50,7 @@
             padding: .5rem 1rem;
             font-weight: bold;
             border-radius: 1rem;
+            
 
             &:hover {
                 cursor: pointer;
