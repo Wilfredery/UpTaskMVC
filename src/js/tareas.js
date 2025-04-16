@@ -66,10 +66,19 @@
             btnEstadoTarea.textContent = estados[tarea.estado];
             btnEstadoTarea.dataset.estadoTarea = tarea.estado;
 
+            btnEstadoTarea.ondblclick = function() {
+
+                cambiarEstadoTarea({...tarea});
+            }
+
             const btnEliminarTarea = document.createElement('BUTTON');
             btnEliminarTarea.classList.add('eliminar-tarea');
             btnEliminarTarea.dataset.idtarea = tarea.id;
             btnEliminarTarea.textContent = 'Eliminar';
+
+            btnEliminarTarea.ondblclick = function() {
+                confirmarEliminarTarea({...tarea});
+            }
 
             opcionesDiv.appendChild(btnEstadoTarea);
             opcionesDiv.appendChild(btnEliminarTarea);
@@ -80,8 +89,6 @@
             const listadoTareas = document.querySelector('#listado-tareas');
             listadoTareas.appendChild(contenedorTarea);
 
-
-            console.log(contenedorTarea);
         })
     }
 
@@ -241,6 +248,88 @@
         } catch (error) {
             console.log(error);
         }
+    }
+
+    function cambiarEstadoTarea(tarea) {
+
+        const nuevoEstado = tarea.estado === '1' ? "0" : "1";
+        tarea.estado = nuevoEstado;
+        actualizarTarea(tarea);
+
+    }
+
+    async function actualizarTarea(tarea) {
+        const {estado, id, nombre, proyectoid} = tarea;
+
+        const datos = new FormData();
+        datos.append('id', id);
+        datos.append('estado', estado);
+        datos.append('nombre', nombre);
+
+        datos.append('proyectoid', obtenerProyecto());
+
+        // for(let valor of datos.values()) {
+
+        //     console.log(valor);
+        // }
+
+        try {
+            const url = 'http://localhost:3000/api/tarea/actualizar';
+
+            const respuesta = await fetch(url, {
+
+                method:'POST',
+                body: datos
+            });
+
+            const resultado = await respuesta.json();
+
+            if(resultado.respuesta.tipo === 'exito') {
+                mostrarAlert(resultado.respuesta.mensaje, resultado.respuesta.tipo, document.querySelector('.contenedor-nueva-tarea'));
+
+                //Mantener sincronizando el backend con el cliente
+
+                tareas = tareas.map(tareaMemoria => {
+                    
+                    if(tareaMemoria.id === id) {
+                        tareaMemoria.estado = estado;
+
+                    } 
+
+                    return tareaMemoria;
+                });
+                
+                mostrarTareas();
+            }
+
+        } catch (error) {
+            console.log(error);
+
+        }
+
+    }
+
+    function confirmarEliminarTarea(tarea) {
+
+        Swal.fire({
+
+            title: "Estas seguro?",
+            showCancelButton: true,
+            confirmButtonText: "Si",
+            cancelButtonText: "No"
+
+        }).then((result) => {
+
+            //Si se responde con si.
+            if (result.isConfirmed) {
+              eliminarTarea(tarea);
+            }
+
+        });
+    }
+
+    async function eliminarTarea(tarea) {
+        const datos = new FormData();
     }
 
     function obtenerProyecto() {
