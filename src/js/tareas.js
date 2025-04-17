@@ -5,7 +5,10 @@
 
     //boton para mostrar el Modal de agregar tarea
     const nuevaTareaBtn = document.querySelector('#agregar-tarea');
-    nuevaTareaBtn.addEventListener('click', mostrarFormulario);
+    nuevaTareaBtn.addEventListener('click', function() {
+        const tarea = {};
+        mostrarFormulario(editar = true, tarea);
+    });
 
     async function obtenerTareas() {
 
@@ -54,6 +57,9 @@
 
             const nombreTarea = document.createElement('P');
             nombreTarea.textContent = tarea.nombre;
+            nombreTarea.ondblclick = function() {
+                mostrarFormulario(editar = true, tarea);
+            }
 
 
             const opcionesDiv = document.createElement('DIV');
@@ -93,14 +99,15 @@
     }
 
 
-    function mostrarFormulario() {
+    function mostrarFormulario(editar = false, tarea = {}) {
         
+        console.log(tarea);
         const modal = document.createElement('DIV');
         modal.classList.add('modal');
         modal.innerHTML = `
         
             <form class="formulario nueva-tarea">
-                <legend>Agrega una nueva tarea</legend>
+                <legend>${editar ? 'Editar Tarea' : 'Agregar una nueva tarea'}</legend>
 
                 <div class="campo">
                     <label for="tarea"> Tarea </label>
@@ -108,14 +115,18 @@
                     <input 
                     type="text"
                     name="tarea"
-                    placeholder="Agregar tarea al proyecto actual"
+                    placeholder="${tarea.nombre ? 'Editar la tarea' : 'Agregar tarea al proyecto'}"
                     id="tarea"
-                    required
+                    value="${tarea.nombre ? tarea.nombre : ''}"
                     >
                 </div>
 
                 <div class="opciones">
-                    <input class="submit-nueva-tarea" type="submit" value="Agregar tarea">
+                    <input 
+                    class="submit-nueva-tarea" 
+                    type="submit" 
+                    value="${tarea.nombre ? 'Guardar' : 'Agregar tarea'}"
+                    id="tarea">
 
                     <button class="cerrar-modal" type="button">Cancelar</button>
                 </div>
@@ -329,7 +340,47 @@
     }
 
     async function eliminarTarea(tarea) {
+
+        const {estado, id, nombre, proyectoid} = tarea;
+
         const datos = new FormData();
+        datos.append('id', id);
+        datos.append('estado', estado);
+        datos.append('nombre', nombre);
+
+        datos.append('proyectoid', obtenerProyecto());
+        
+        try {
+            
+            const url = 'http://localhost:3000/api/tarea/eliminar';
+
+            const respuesta = await fetch(url, {
+                method: 'POST',
+                body: datos
+            });
+
+            console.log(respuesta);
+
+            const resultado = await respuesta.json();
+            
+            if (resultado.resultado) {
+                // mostrarAlert(resultado.mensaje, resultado.tipo, document.querySelector('.contenedor-nueva-tarea'));
+
+                Swal.fire('Eliminado!', resultado.mensaje, 'success')
+                //Sacar del VirtualDOM
+    
+                //El filter deja dicho en esta codicion,traete todas excepto a la que yo elimine
+                tareas = tareas.filter( tareaMemoria => tareaMemoria.id != tarea.id);
+                mostrarTareas();
+            }
+
+
+
+
+        } catch (error) {
+            console.log(error);
+        }
+        
     }
 
     function obtenerProyecto() {
