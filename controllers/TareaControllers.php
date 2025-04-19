@@ -36,7 +36,7 @@ class TareaControllers {
                 $respuesta = [
                     'tipo' => 'error',
                     'mensaje' => 'Hubo un Error al agregar la tarea.',
-                    'proyectoid' => $proyecto->id
+                    //'proyectoid' => $proyecto->id
                 ];
 
                 echo json_encode($respuesta);
@@ -52,7 +52,7 @@ class TareaControllers {
                 'tipo' =>'exito',
                 'id' => $resultado['id'],
                 'mensaje' => 'Tarea creada correctamente',
-                
+                'proyectoid' => $proyecto->id
             ];
             echo json_encode($respuesta);
             //     $respuesta = [
@@ -76,7 +76,7 @@ class TareaControllers {
                 $respuesta = [
                     'tipo' => 'error',
                     'mensaje' => 'Hubo un Error en actualizar la tarea.',
-                    'proyectoid' => $proyecto->id
+                    //'proyectoid' => $proyecto->id
                 ];
 
                 echo json_encode($respuesta);
@@ -89,7 +89,7 @@ class TareaControllers {
             $resultado = $tarea->guardar();
             if($resultado) {
                 $respuesta = [
-                    'tipo' =>'exito',
+                    'tipo' => 'exito',
                     'id' => $tarea->id,
                     'proyectoid' => $proyecto->id,
                     'mensaje' => 'Actualizado correctamente'
@@ -112,7 +112,7 @@ class TareaControllers {
                     $respuesta = [
                     'tipo' => 'error',
                     'mensaje' => 'Hubo un Error al eliminar la tarea.',
-                    'proyectoid' => $proyecto->id
+                    //'proyectoid' => $proyecto->id
                 ];
 
                 echo json_encode($respuesta);

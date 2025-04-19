@@ -4,6 +4,42 @@
         <div class="contenedor-nueva-tarea">
             <button class="agregar-tarea" type="button" id="agregar-tarea">&#43; Nueva tarea</button>
         </div>
+            <div id="filtros" class="filtros">
+                <div class="filtros-inputs">
+                    <h2>Filtros:</h2>
+                    <div class="campo">
+                        <label for="todas">Todas</label>
+                        <input
+                            type="radio"
+                            id="todas"
+                            name="filtro"
+                            value=""
+                            checked
+                        />
+                    </div>
+
+                    <div class="campo">
+                        <label for="completadas">Completadas</label>
+                        <input
+                            type="radio"
+                            id="completadas"
+                            name="filtro"
+                            value="1"
+                        />
+                    </div>
+
+                    <div class="campo">
+                        <label for="pendientes">Pendientes</label>
+                        <input
+                            type="radio"
+                            id="pendientes"
+                            name="filtro"
+                            value="0"
+                            checked
+                        />
+                    </div>
+                </div>
+            </div>
 
         <ul id="listado-tareas" class="listado-tareas">
             <!-- Aqui se inyectara el contenido desde tareas.js -->
