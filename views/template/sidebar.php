@@ -1,4 +1,16 @@
 <aside class="sidebar">
+
+    <div class="contenedor-sidebar">
+
+        <h2>UpTask</h2>
+
+        <div class="cerrar-menu">
+            <img id="cerrar-menu" src="build/img/cerrar.svg" alt="imagen cerrar menu" />
+        </div>
+
+    </div>
+
+
     <h2>UpTask</h2>
 
     <nav class="sidebar-nav">
