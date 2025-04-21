@@ -60,10 +60,11 @@
                     cursor: pointer;
                 }
             }
+            @include m.tablet {
+                display: none;
+            }
         }
     }
-
-
 
     .sidebar-nav {
         margin-top: 5rem;
@@ -71,17 +72,37 @@
         a {
             color: v.$blanco;
             display: block;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             padding: .7rem;
             transition-property: background-color;
             transition-duration: 300ms;
-            font-size: 1.2rem;
+            font-size: 2.4rem;
             text-transform: uppercase;
+            font-weight: bold;
+            text-align: center;
          
             &:hover, &.activo {
                 background-color: color.adjust(v.$indigo, $lightness: -20%);
                 border-radius: .5rem;
             }
+
+            @include m.tablet {
+                font-size: 1.4rem;
+                margin-bottom: 1.5rem;
+                text-align: left;
+            }
+        }
+    }
+
+    .cerrar-sesion-mobile {       
+        margin-top: 10rem;
+           
+        .cerrar-sesion {
+            @include m.boton(color.adjust(v.$indigo, $lightness: -20%), v.$blanco);
+        }
+
+        @include m.tablet {
+            display: none;
         }
     }
 }
