@@ -13,6 +13,8 @@ class Usuario extends ActiveRecord {
     public $password2;
     public $token;
     public $confirmado;
+    public $password_actual;
+    public $password_nuevo;
 
     public function __construct($args=[]) {
         
@@ -21,6 +23,8 @@ class Usuario extends ActiveRecord {
         $this->email = $args['email'] ?? ''; 
         $this->password = $args['password'] ?? ''; 
         $this->password2 = $args['password2'] ?? ''; 
+        $this->password_actual = $args['password_actual'] ?? ''; 
+        $this->password_nuevo = $args['password_nuevo'] ?? '';
         $this->token = $args['token'] ?? ''; 
         $this->confirmado = $args['confirmado'] ?? 0; 
     }
@@ -71,12 +75,48 @@ class Usuario extends ActiveRecord {
         return self::$alertas;
     }
 
+    //Validacion para el perfil
+    public function validarPerfil() {
+        if(!$this->nombre) {
+            self::$alertas['error'][] = 'El nombre del usuario es obligatorio';
+        }
+
+        if(!$this->email) {
+            self::$alertas['error'][] = 'El E-mail del usuario es obligatorio';
+        }
+
+        return self::$alertas;
+    }
+
+    public function nuevo_password() {
+
+        if(!$this->password_actual) {
+            self::$alertas['error'][] = 'El password actual es obligatorio';
+        }   
+
+        if(!$this->password_nuevo) {
+            self::$alertas['error'][] = 'El password nuevo es obligatorio';
+        }  
+
+
+        if(strlen($this->password_nuevo) < 6) {
+            self::$alertas['error'][] = 'La contraseña debe de tener al menos 6 caracteres';
+        }
+
+        return self::$alertas;
+    }
+
+    //comprobar el password
+    public function comprobar_password() : bool{
+        return password_verify($this->password_actual, $this->password);
+    }
+
     //Hashea el password
-    public function hashearPassword() {
+    public function hashearPassword() : void {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
 
-    public function validarPassword() {
+    public function validarPassword() : array {
         if(!$this->password) {
             self::$alertas['error'][] = 'La contraseña del usuario es obligatorio';
         }
@@ -88,7 +128,8 @@ class Usuario extends ActiveRecord {
         return self::$alertas;
     }
     //Generar un Token
-    public function crearTOken() {
+    public function crearTOken() : void {
+        //Generar un token unico
         $this->token = uniqid();
     }
 
