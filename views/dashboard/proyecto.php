@@ -35,7 +35,6 @@
                             id="pendientes"
                             name="filtro"
                             value="0"
-                            checked
                         />
                     </div>
                 </div>
